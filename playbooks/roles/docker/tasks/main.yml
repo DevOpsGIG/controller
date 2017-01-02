@@ -1,0 +1,32 @@
+---
+# tasks file for docker
+- name: add docker repo
+  yum_repository:
+    name: dockerrepo
+    description: Docker Repository
+    baseurl: https://yum.dockerproject.org/repo/main/centos/7
+    gpgkey: https://yum.dockerproject.org/gpg
+    gpgcheck: yes
+
+- name: install docker
+  yum: name={{ item }} state=present
+  with_items:
+    - docker-engine
+    - python-docker-py
+
+- name: add docker group
+  group:
+    name: docker
+    state: present
+
+- name: add existing user vagrant to group docker
+  user: name=vagrant
+    groups=docker
+    append=yes
+
+- name: enable docker service
+  service:
+    name: docker.service
+    state: started
+    enabled: yes
+...

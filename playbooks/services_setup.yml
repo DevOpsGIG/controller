@@ -1,0 +1,24 @@
+---
+- hosts: services
+  become: yes
+
+  pre_tasks:
+    - name: enable epel repository
+      yum:
+        name=epel-release
+        state=present
+
+  roles:
+    - docker
+    - clone_repos
+
+  tasks:
+
+    - name: start restapi service
+      command: make --directory /home/vagrant/restapi/ run
+      when: inventory_hostname in groups["servers"]
+
+    - name: start arithproducer service
+      command: make --directory /home/vagrant/arithproducer/ run
+      when: inventory_hostname in groups["producers"]
+...

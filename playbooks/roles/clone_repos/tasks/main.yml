@@ -1,0 +1,51 @@
+---
+  - name: copy ssh keys
+    copy:
+      src: /{{ user }}/playbooks/services_vars/keys/{{ item.file }}
+      dest: /home/{{ user }}/.ssh/
+      owner: "{{ user }}"
+      group: "{{ group }}"
+      mode: 0600
+    with_items:
+    - { file: id_rsa }
+    - { file: id_rsa.pub }
+
+  - name: install git
+    yum:
+      name=git
+      state=present
+
+  - name: clone restapi repository
+    git:
+      repo: "{{ restapi['repo'] }}"
+      dest: "{{ restapi['dest'] }}"
+      key_file: "{{ key }}"
+      accept_hostkey: yes
+      update: yes
+    when: inventory_hostname in groups["servers"]
+
+  - name: change restapi directory ownership
+    file:
+      path: /home/{{ user }}/restapi/
+      owner: "{{ user }}"
+      group: "{{ user }}"
+      mode: 0774
+    when: inventory_hostname in groups["servers"]
+
+  - name: clone arithmetic-producer repository
+    git:
+      repo: "{{ arithproducer['repo'] }}"
+      dest: "{{ arithproducer['dest'] }}"
+      key_file: "{{ key }}"
+      accept_hostkey: yes
+      update: yes
+    when: inventory_hostname in groups["producers"]
+
+  - name: change arithproducer directory ownership
+    file:
+      path: /home/{{ user }}/arithproducer/
+      owner: "{{ user }}"
+      group: "{{ user }}"
+      mode: 0774
+    when: inventory_hostname in groups["producers"]
+...

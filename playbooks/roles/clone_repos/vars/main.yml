@@ -1,0 +1,15 @@
+---
+user: vagrant
+group: vagrant
+key: /home/{{ user }}/.ssh/id_rsa
+
+restapi:
+  user: vagrant
+  dest: /home/{{ user }}/restapi
+  repo: git@github.com:DevOpsGIG/restapi.git
+
+arithproducer:
+  user: vagrant
+  dest: /home/{{ user }}/arithproducer
+  repo: git@github.com:DevOpsGIG/arithproducer.git
+...
