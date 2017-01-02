@@ -1,0 +1,25 @@
+---
+  - name: enable epel repository
+    yum:
+        name=epel-release
+        state=present
+
+  - name: install ansible
+    yum:
+      name=ansible
+      state=present
+
+  - name: stat ansible configuration file
+    stat:
+      path: "{{ cfg_file }}"
+    register: stat_ansible_config
+
+  - name: copy .ansible.cfg to home directory
+    copy:
+      src: .ansible.cfg
+      dest: /home/{{ user }}/.ansible.cfg
+      owner: "{{ user }}"
+      group: "{{ group }}"
+      mode: 0644
+    when: stat_ansible_config.stat.exists
+...

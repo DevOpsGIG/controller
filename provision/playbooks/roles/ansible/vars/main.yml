@@ -1,0 +1,5 @@
+---
+user: vagrant
+group: vagrant
+cfg_file: /{{ user }}/provision/playbooks/roles/ansible/files/.ansible.cfg
+...
