@@ -1,0 +1,5 @@
+.vagrant/
+.ssh/
+playbooks/*.retry
+playbooks/roles/*.retry
+provision/playbooks/*.retry
