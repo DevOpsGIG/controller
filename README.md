@@ -8,8 +8,8 @@
 git clone git@bitbucket.org:marionete/ansible-controller.git
 vagrant up
 vagrant ssh controller
-ansible-playbook /vagrant/playbooks/host_setup.yml -i /vagrant/.inventory
-ansible-playbook --ask-vault-pass /vagrant/playbooks/services_setup.yml -i /vagrant/.inventory
+ansible-playbook /vagrant/playbooks/host_setup.yml
+ansible-playbook --ask-vault-pass /vagrant/playbooks/services_setup.yml
 ```
 
 Be happy.
