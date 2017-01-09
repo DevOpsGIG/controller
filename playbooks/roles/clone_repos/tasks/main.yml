@@ -15,6 +15,23 @@
       name=git
       state=present
 
+  - name: clone arithsubscriber repository
+    git:
+      repo: "{{ arithsubscriber['repo'] }}"
+      dest: "{{ arithsubscriber['dest'] }}"
+      key_file: "{{ key }}"
+      accept_hostkey: yes
+      update: yes
+    when: inventory_hostname in groups["subscribers"]
+
+  - name: change arithsubscriber ownership
+    file:
+      path: /home/{{ user }}/arithsubscriber/
+      owner: "{{ user }}"
+      group: "{{ user }}"
+      mode: 0774
+    when: inventory_hostname in groups["subscribers"]
+
   - name: clone restapi repository
     git:
       repo: "{{ restapi['repo'] }}"

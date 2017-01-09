@@ -12,4 +12,9 @@ arithproducer:
   user: vagrant
   dest: /home/{{ user }}/arithproducer
   repo: git@github.com:DevOpsGIG/arithproducer.git
+
+arithsubscriber:
+  user: vagrant
+  dest: /home/{{ user }}/arithsubscriber
+  repo: git@github.com:DevOpsGIG/arithsubscriber.git
 ...

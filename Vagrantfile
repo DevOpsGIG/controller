@@ -1,8 +1,13 @@
 Vagrant.configure("2") do |config|
   # Morpheus yells: MACHINES!
   $nodes = {
-    "Arithmetic Producer" => {
-      "tag" => "arithproducer",
+    "Subscribers" => {
+      "tag" => "subscribers",
+      "IP" => "192.168.50.5",
+      "synced_folder_disabled" => true
+    },
+    "Producers" => {
+      "tag" => "producers",
       "IP" => "192.168.50.4",
       "synced_folder_disabled" => true
     },
