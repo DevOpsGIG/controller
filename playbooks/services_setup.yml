@@ -14,6 +14,10 @@
 
   tasks:
 
+    - name: start arithsubscriber service
+      command: make --directory /home/vagrant/arithsubscriber/ run
+      when: inventory_hostname in groups["subscribers"]
+
     - name: start restapi service
       command: make --directory /home/vagrant/restapi/ run
       when: inventory_hostname in groups["servers"]
